@@ -134,15 +134,15 @@ function JournalComponent() {
 				</div>
 
 				{lodash.has(journalValue, todayDate) &&
-					lodash.has(journalValue[todayDate], 'grateful') &&
-					Object.keys(journalValue[todayDate].grateful).map((key) => {
+					lodash.has(journalValue?.[todayDate], 'grateful') &&
+					Object.keys(journalValue?.[todayDate]?.grateful ?? {}).map((key) => {
 						return (
 							<TextInputComponent
 								key={key}
 								type={'grateful'}
 								id={key}
 								action={modifySectionRow}
-								initialValue={journalValue[todayDate].grateful[key]}
+								initialValue={journalValue?.[todayDate]?.grateful[key]}
 							/>
 						);
 					})}
@@ -157,7 +157,19 @@ function JournalComponent() {
 						Making small changes is better than staying the same
 					</span>
 				</div>
-
+				{lodash.has(journalValue, todayDate) &&
+					lodash.has(journalValue?.[todayDate], 'great') &&
+					Object.keys(journalValue?.[todayDate]?.great ?? {}).map((key) => {
+						return (
+							<TextInputComponent
+								key={key}
+								type={'great'}
+								id={key}
+								action={modifySectionRow}
+								initialValue={journalValue?.[todayDate]?.great[key]}
+							/>
+						);
+					})}
 				<AddNewRowInputComponent type={'great'} action={addNewSectionRow} />
 			</section>
 
@@ -170,7 +182,19 @@ function JournalComponent() {
 						this!
 					</span>
 				</div>
-
+				{lodash.has(journalValue, todayDate) &&
+					lodash.has(journalValue?.[todayDate], 'affirmations') &&
+					Object.keys(journalValue?.[todayDate]?.affirmations ?? {}).map((key) => {
+						return (
+							<TextInputComponent
+								key={key}
+								type={'affirmations'}
+								id={key}
+								action={modifySectionRow}
+								initialValue={journalValue?.[todayDate]?.affirmations[key]}
+							/>
+						);
+					})}
 				<AddNewRowInputComponent type={'affirmations'} action={addNewSectionRow} />
 			</section>
 
@@ -188,7 +212,19 @@ function JournalComponent() {
 						Did something out of the ordinary occur?
 					</span>
 				</div>
-
+				{lodash.has(journalValue, todayDate) &&
+					lodash.has(journalValue?.[todayDate], 'highlights') &&
+					Object.keys(journalValue?.[todayDate]?.highlights ?? {}).map((key) => {
+						return (
+							<TextInputComponent
+								key={key}
+								type={'highlights'}
+								id={key}
+								action={modifySectionRow}
+								initialValue={journalValue?.[todayDate]?.highlights[key]}
+							/>
+						);
+					})}
 				<AddNewRowInputComponent type={'highlights'} action={addNewSectionRow} />
 			</section>
 
@@ -200,7 +236,19 @@ function JournalComponent() {
 						Life is a journey of continuous learning and exploration.
 					</span>
 				</div>
-
+				{lodash.has(journalValue, todayDate) &&
+					lodash.has(journalValue?.[todayDate], 'learn') &&
+					Object.keys(journalValue?.[todayDate]?.learn ?? {}).map((key) => {
+						return (
+							<TextInputComponent
+								key={key}
+								type={'learn'}
+								id={key}
+								action={modifySectionRow}
+								initialValue={journalValue?.[todayDate]?.learn[key]}
+							/>
+						);
+					})}
 				<AddNewRowInputComponent type={'learn'} action={addNewSectionRow} />
 			</section>
 
@@ -213,7 +261,19 @@ function JournalComponent() {
 						acknowledging that they happened.
 					</span>
 				</div>
-
+				{lodash.has(journalValue, todayDate) &&
+					lodash.has(journalValue?.[todayDate], 'work') &&
+					Object.keys(journalValue?.[todayDate]?.work ?? {}).map((key) => {
+						return (
+							<TextInputComponent
+								key={key}
+								type={'work'}
+								id={key}
+								action={modifySectionRow}
+								initialValue={journalValue?.[todayDate]?.work[key]}
+							/>
+						);
+					})}
 				<AddNewRowInputComponent type={'work'} action={addNewSectionRow} />
 			</section>
 		</div>

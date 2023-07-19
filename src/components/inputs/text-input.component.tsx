@@ -5,7 +5,7 @@ import { useRef } from 'react';
 type TextInputType = {
 	type: string;
 	id: string;
-	initialValue: string | null;
+	initialValue: string | null | undefined;
 	action: (type: string, value: string, id: string) => void;
 };
 
