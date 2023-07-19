@@ -117,7 +117,9 @@ function JournalComponent() {
 	return (
 		<div className='flex h-full w-full flex-col gap-y-8 pt-12'>
 			<div className='flex flex-col gap-y-4'>
-				<span className='text-lg font-bold'>20 / 06 / 2023</span>
+				<span className='text-lg font-bold'>
+					{todayDate.split('/').join(' / ')}
+				</span>
 				<span className='flex gap-x-2 text-sm font-bold text-picton-blue-500'>
 					Morning journal <SunIcon className='w-[1.25rem]' />
 				</span>
