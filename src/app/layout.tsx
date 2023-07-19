@@ -59,8 +59,10 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en' className='h-full w-full'>
-			<body className={`${openSans.variable} ${inter.variable} h-full w-full`}>
-				<div className='mx-auto flex h-full w-full max-w-xl flex-col font-inter'>
+			<body
+				className={`${openSans.variable} ${inter.variable} no-scroll h-full w-full`}
+			>
+				<div className='no-scroll mx-auto flex h-auto w-full max-w-xl flex-col gap-y-6 p-6 font-inter text-emperor-100'>
 					<HeaderComponent />
 
 					{children}
