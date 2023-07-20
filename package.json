@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "set NODE_ENV=development&& next dev",
-    "dev-turbo": "next dev --turbo",
+    "dev-turbo": "set NODE_ENV=development&& next dev --turbo",
     "build": "set NODE_ENV=production&& next build",
     "start": "set NODE_ENV=production&& next start",
     "lint": "next lint"

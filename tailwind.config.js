@@ -16,6 +16,25 @@ module.exports = {
 				'gradient-conic':
 					'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 			},
+			keyframes: {
+				bounceHorizontal: {
+					'0%, 100%': { transform: 'translateX(0)' },
+					'50%': { transform: 'translateX(20%)' },
+				},
+				textSlideIn: {
+					'0%': { transform: 'translateY(-56px)', opacity: 0 },
+					'100%': { transform: 'translateY(0)', opacity: 1 },
+				},
+				addSlideIn: {
+					'0%': { transform: 'translateY(-56px)' },
+					'100%': { transform: 'translateY(0)' },
+				},
+			},
+			animation: {
+				'bounce-horizontal': 'bounceHorizontal 3s ease-in-out infinite',
+				'text-slide-in': 'textSlideIn .3s ease-out forwards',
+				'add-slide-in': 'addSlideIn .3s ease-out forwards',
+			},
 			colors: {
 				emperor: {
 					50: '#f7f7f7',

@@ -62,7 +62,7 @@ export default function RootLayout({
 			<body
 				className={`${openSans.variable} ${inter.variable} no-scroll h-full w-full`}
 			>
-				<div className='no-scroll mx-auto flex h-auto w-full max-w-xl flex-col gap-y-6 p-6 font-inter text-emperor-100'>
+				<div className='no-scroll mx-auto flex h-auto w-full max-w-xl flex-col gap-y-6 bg-emperor-1000 p-6 font-inter text-emperor-100'>
 					<HeaderComponent />
 
 					{children}
