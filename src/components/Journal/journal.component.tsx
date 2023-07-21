@@ -7,6 +7,8 @@ import AddNewRowInputComponent from '@components/inputs/add-new-row-input.compon
 // @ts-ignore
 import { v4 as uuidv4 } from 'uuid';
 import TextInputComponent from '@components/inputs/text-input.component.tsx';
+import NotificationsComponent from '@components/notifications/notifications.component.tsx';
+import { useNotification } from '../../utils/use-notification.ts';
 
 type BaseValue = {
 	[key: string]: string | null;
@@ -25,6 +27,8 @@ type JournalValue = {
 
 function JournalComponent() {
 	const [journalValue, setJournalValue] = useState<JournalValue>(null);
+	const [{ setNotification }] = useNotification();
+
 	const todayDate = new Date().toLocaleDateString('en-GB');
 
 	useEffect(() => {
@@ -57,6 +61,9 @@ function JournalComponent() {
 			return;
 		}
 		localStorage.setItem('journal', JSON.stringify(journalValue));
+		setNotification({ message: 'Changes saved', type: 'success' });
+		console.log('changes');
+		// eslint-disable-next-line react-hooks/rules-of-hooks
 		console.log(journalValue);
 	}, [journalValue]);
 
@@ -114,6 +121,18 @@ function JournalComponent() {
 		});
 	}
 
+	function deleteSectionRow(type: string, id: string) {
+		setJournalValue({
+			...journalValue,
+			[todayDate]: {
+				// @ts-ignore
+				...journalValue[todayDate],
+				// @ts-ignore
+				[type]: lodash.omit(journalValue?.[todayDate]?.[type], [id]),
+			},
+		});
+	}
+
 	return (
 		<div className='flex h-full w-full flex-col gap-y-8 pt-12 text-lg'>
 			<div className='flex flex-col gap-y-4'>
@@ -144,7 +163,8 @@ function JournalComponent() {
 									key={key}
 									type={'grateful'}
 									id={key}
-									action={modifySectionRow}
+									onType={modifySectionRow}
+									onDelete={deleteSectionRow}
 									last={index === arr.length - 1}
 									initialValue={journalValue?.[todayDate]?.grateful[key]}
 								/>
@@ -171,7 +191,8 @@ function JournalComponent() {
 									key={key}
 									type={'great'}
 									id={key}
-									action={modifySectionRow}
+									onType={modifySectionRow}
+									onDelete={deleteSectionRow}
 									last={index === arr.length - 1}
 									initialValue={journalValue?.[todayDate]?.great[key]}
 								/>
@@ -199,7 +220,8 @@ function JournalComponent() {
 									key={key}
 									type={'affirmations'}
 									id={key}
-									action={modifySectionRow}
+									onType={modifySectionRow}
+									onDelete={deleteSectionRow}
 									last={index === arr.length - 1}
 									initialValue={journalValue?.[todayDate]?.affirmations[key]}
 								/>
@@ -232,7 +254,8 @@ function JournalComponent() {
 									key={key}
 									type={'highlights'}
 									id={key}
-									action={modifySectionRow}
+									onType={modifySectionRow}
+									onDelete={deleteSectionRow}
 									last={index === arr.length - 1}
 									initialValue={journalValue?.[todayDate]?.highlights[key]}
 								/>
@@ -259,7 +282,8 @@ function JournalComponent() {
 									key={key}
 									type={'learn'}
 									id={key}
-									action={modifySectionRow}
+									onType={modifySectionRow}
+									onDelete={deleteSectionRow}
 									last={index === arr.length - 1}
 									initialValue={journalValue?.[todayDate]?.learn[key]}
 								/>
@@ -287,7 +311,8 @@ function JournalComponent() {
 									key={key}
 									type={'work'}
 									id={key}
-									action={modifySectionRow}
+									onType={modifySectionRow}
+									onDelete={deleteSectionRow}
 									last={index === arr.length - 1}
 									initialValue={journalValue?.[todayDate]?.work[key]}
 								/>
@@ -296,6 +321,8 @@ function JournalComponent() {
 					)}
 				<AddNewRowInputComponent type={'work'} action={addNewSectionRow} />
 			</section>
+
+			<NotificationsComponent />
 		</div>
 	);
 }

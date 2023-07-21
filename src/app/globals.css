@@ -27,16 +27,18 @@
 }
 
 textarea {
-    height: 36px;
     resize: none;
     overflow: hidden;
 }
 
-body {
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(
-            to bottom,
-            transparent,
-            rgb(var(--background-end-rgb))
-    ) rgb(var(--background-start-rgb));
+circle {
+    fill: transparent;
+    stroke: orange;
+    stroke-width: 3px;
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    animation: clock-animation 3s linear infinite;
 }
+

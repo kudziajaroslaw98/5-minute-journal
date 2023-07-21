@@ -58,9 +58,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang='en' className='h-full w-full'>
+		<html lang='en' className='h-full w-full bg-emperor-1000'>
 			<body
-				className={`${openSans.variable} ${inter.variable} no-scroll h-full w-full`}
+				className={`${openSans.variable} ${inter.variable} no-scroll h-full w-full bg-emperor-1000`}
 			>
 				<div className='no-scroll mx-auto flex h-auto w-full max-w-xl flex-col gap-y-6 bg-emperor-1000 p-6 font-inter text-emperor-100'>
 					<HeaderComponent />

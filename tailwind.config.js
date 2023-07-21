@@ -29,11 +29,20 @@ module.exports = {
 					'0%': { transform: 'translateY(-56px)' },
 					'100%': { transform: 'translateY(0)' },
 				},
+				timelapse: {
+					'0%': {
+						strokeDashoffset: 0,
+					},
+					'100%': {
+						strokeDashoffset: 30,
+					},
+				},
 			},
 			animation: {
 				'bounce-horizontal': 'bounceHorizontal 3s ease-in-out infinite',
 				'text-slide-in': 'textSlideIn .3s ease-out forwards',
 				'add-slide-in': 'addSlideIn .3s ease-out forwards',
+				timelapse: 'timelapse 3s linear forwards',
 			},
 			colors: {
 				emperor: {
