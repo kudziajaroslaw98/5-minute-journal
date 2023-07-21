@@ -21,7 +21,7 @@ function TextInputComponent({
 }: TextInputType) {
 	const textAreaRef = useRef(null);
 	const [buttonState, setButtonState] = useState('default');
-	const MIN_TEXTAREA_HEIGHT = 56;
+	const MIN_TEXTAREA_HEIGHT = 36;
 
 	useEffect(() => {
 		autoGrowOnLoad();
@@ -78,12 +78,12 @@ function TextInputComponent({
 				onInput={(e) => autoGrow()}
 				onBlur={(e) => onType(type, id, e.target.value)}
 				defaultValue={initialValue ?? ''}
-				className='h-9 w-full bg-transparent p-2 text-emperor-100'
+				className='w-full bg-transparent p-2 text-emperor-100'
 			/>
 			<button
 				onClick={() => handleButtonClick()}
-				className={`flex h-9 w-full items-center justify-center gap-x-2 border-t-[0.5px] border-emperor-900 p-2 ${
-					buttonState === 'clicked' && 'bg-red-400 text-emperor-100 transition-all '
+				className={`flex h-9 w-full items-center justify-center gap-x-2 border-t-[0.5px] border-emperor-900 bg-emperor-1000 p-2 transition-all ${
+					buttonState === 'clicked' && 'bg-red-400 text-emperor-100'
 				}`}
 			>
 				{buttonState === 'clicked' && (
@@ -97,7 +97,12 @@ function TextInputComponent({
 					</svg>
 				)}
 				<span>
-					Remove <span className='sr-only'>this row</span>
+					{buttonState === 'default' && (
+						<span>
+							Remove <span className='sr-only'>this row</span>
+						</span>
+					)}
+					{buttonState === 'clicked' && <span>Click to confirm</span>}
 				</span>
 			</button>
 		</div>

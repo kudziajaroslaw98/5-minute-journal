@@ -7,8 +7,8 @@ import AddNewRowInputComponent from '@components/inputs/add-new-row-input.compon
 // @ts-ignore
 import { v4 as uuidv4 } from 'uuid';
 import TextInputComponent from '@components/inputs/text-input.component.tsx';
+import useNotification from '../../utils/use-notification.ts';
 import NotificationsComponent from '@components/notifications/notifications.component.tsx';
-import { useNotification } from '../../utils/use-notification.ts';
 
 type BaseValue = {
 	[key: string]: string | null;
@@ -27,7 +27,7 @@ type JournalValue = {
 
 function JournalComponent() {
 	const [journalValue, setJournalValue] = useState<JournalValue>(null);
-	const [{ setNotification }] = useNotification();
+	const [isPending, notification, setNotification] = useNotification();
 
 	const todayDate = new Date().toLocaleDateString('en-GB');
 
@@ -60,11 +60,15 @@ function JournalComponent() {
 		if (journalValue === null) {
 			return;
 		}
-		localStorage.setItem('journal', JSON.stringify(journalValue));
-		setNotification({ message: 'Changes saved', type: 'success' });
-		console.log('changes');
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		console.log(journalValue);
+		if (
+			!lodash.isEqual(
+				JSON.stringify(journalValue),
+				localStorage.getItem('journal')
+			)
+		) {
+			localStorage.setItem('journal', JSON.stringify(journalValue));
+			setNotification({ message: 'Changes saved', type: 'success' });
+		}
 	}, [journalValue]);
 
 	function checkIfTodayIsAvailable() {
@@ -322,7 +326,7 @@ function JournalComponent() {
 				<AddNewRowInputComponent type={'work'} action={addNewSectionRow} />
 			</section>
 
-			<NotificationsComponent />
+			<NotificationsComponent isPending={isPending} notification={notification} />
 		</div>
 	);
 }

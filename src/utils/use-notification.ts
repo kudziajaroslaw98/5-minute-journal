@@ -5,7 +5,7 @@ type UseNotification = {
 	type: string;
 };
 
-export function useNotification() {
+function useNotification() {
 	const [isPending, setIsPending] = useState(false);
 	const [notification, setNotification] = useState<UseNotification | undefined>({
 		message: '',
@@ -13,16 +13,19 @@ export function useNotification() {
 	});
 
 	useEffect(() => {
-		console.log('notification.message', notification?.message);
-		if (notification) {
+		if (notification && notification.message !== '') {
 			setIsPending(true);
-			console.log('notification.pending', isPending);
 			setTimeout(() => {
 				setIsPending(false);
+			}, 2700);
+
+			setTimeout(() => {
 				setNotification(undefined);
 			}, 3000);
 		}
 	}, [notification]);
 
-	return [{ isPending, notification, setNotification }];
+	return [isPending, notification, setNotification] as const;
 }
+
+export default useNotification;
