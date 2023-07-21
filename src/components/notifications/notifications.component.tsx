@@ -1,11 +1,10 @@
 'use client';
 
+import { UseNotificationType } from '../../utils/use-notification.ts';
+
 type NotificationType = {
 	isPending: boolean;
-	notification: {
-		type: string;
-		message: string;
-	};
+	notification: UseNotificationType | undefined;
 };
 
 function NotificationsComponent({ isPending, notification }: NotificationType) {

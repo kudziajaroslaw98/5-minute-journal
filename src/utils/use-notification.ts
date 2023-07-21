@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 
-type UseNotification = {
+export type UseNotificationType = {
 	message: string;
 	type: string;
 };
 
 function useNotification() {
 	const [isPending, setIsPending] = useState(false);
-	const [notification, setNotification] = useState<UseNotification | undefined>({
+	const [notification, setNotification] = useState<
+		UseNotificationType | undefined
+	>({
 		message: '',
 		type: '',
 	});
