@@ -26,12 +26,14 @@ function JournalTypeToggleComponent({ typeSetter }: JournalTypeToggleType) {
 				onClick={() => handleSettingType()}
 			>
 				<button
-					className={`flex h-8 w-8 items-center justify-center rounded-full bg-picton-blue-500 transition-all hover:bg-picton-blue-400 ${
-						type === types[1] ? 'translate-x-[92px]' : 'translate-x-0'
+					className={`flex h-12 w-12 items-center justify-center rounded-full transition-all ${
+						type === types[1]
+							? 'translate-x-[72px] bg-emperor-800 hover:bg-emperor-800'
+							: 'translate-x-0 bg-picton-blue-500 hover:bg-picton-blue-400'
 					}`}
 				>
-					{type === types[0] && <SunIcon className='w-5' />}
-					{type === types[1] && <MoonIcon className='w-5' />}
+					{type === types[0] && <SunIcon className='w-8' />}
+					{type === types[1] && <MoonIcon className='w-8' />}
 				</button>
 			</div>
 

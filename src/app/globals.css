@@ -29,14 +29,24 @@
 textarea {
     resize: none;
     overflow: hidden;
+    height: 36px;
 }
 
 circle {
     fill: transparent;
     stroke: orange;
-    stroke-width: 3px;
-    stroke-dasharray: 30;
-    stroke-dashoffset: 30;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    animation: clock-animation 3s linear infinite;
+}
+
+rect {
+    fill: transparent;
+    stroke: orange;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
     transform: rotate(-90deg);
     transform-origin: center;
     animation: clock-animation 3s linear infinite;

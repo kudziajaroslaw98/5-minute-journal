@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 type TextInputType = {
 	type: string;
@@ -15,17 +16,23 @@ function TextInputComponent({
 	type,
 	initialValue,
 	id,
-	last,
 	onType,
 	onDelete,
 }: TextInputType) {
 	const textAreaRef = useRef(null);
 	const [buttonState, setButtonState] = useState('default');
+	const [isNew, setIsNew] = useState(true);
 	const MIN_TEXTAREA_HEIGHT = 36;
 
 	useEffect(() => {
 		autoGrowOnLoad();
 	}, [textAreaRef]);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setIsNew(false);
+		}, 1000);
+	}, []);
 
 	function autoGrow() {
 		// @ts-ignore
@@ -69,8 +76,8 @@ function TextInputComponent({
 	return (
 		<div
 			className={`
-				${last && '-z-10 animate-text-slide-in'}
-				z-10 h-fit w-full gap-y-0 rounded-sm border-[0.5px] border-emperor-900 bg-emperor-1000 text-sm
+				${isNew && '-z-10 animate-text-slide-in'}
+				z-10 flex h-fit w-full gap-y-0 rounded-sm bg-emperor-1000 text-sm
 				`}
 		>
 			<textarea
@@ -78,31 +85,24 @@ function TextInputComponent({
 				onInput={(e) => autoGrow()}
 				onBlur={(e) => onType(type, id, e.target.value)}
 				defaultValue={initialValue ?? ''}
-				className='w-full bg-transparent p-2 text-emperor-100'
+				className='mr-2 flex w-full max-w-[486.5px] border-[0.5px] border-emperor-900 bg-transparent p-2 text-emperor-100 outline-none'
 			/>
 			<button
 				onClick={() => handleButtonClick()}
-				className={`flex h-9 w-full items-center justify-center gap-x-2 border-t-[0.5px] border-emperor-900 bg-emperor-1000 p-2 transition-all ${
+				className={`relative flex h-9 w-9 items-center justify-center rounded-sm border-[0.5px] border-emperor-900 bg-emperor-1000 p-2 transition-all ${
 					buttonState === 'clicked' && 'bg-red-400 text-emperor-100'
 				}`}
 			>
-				{buttonState === 'clicked' && (
-					<svg className='h-5 w-5'>
-						<circle
-							className='-rotate-90 animate-timelapse fill-transparent stroke-emperor-100 stroke-[3px]'
-							cx='50%'
-							cy='50%'
-							r='5'
-						/>
-					</svg>
-				)}
 				<span>
-					{buttonState === 'default' && (
-						<span>
-							Remove <span className='sr-only'>this row</span>
+					{buttonState === 'default' && <XMarkIcon className='h-5 w-5' />}
+					{buttonState === 'clicked' && (
+						<span className=' flex flex-col items-center justify-center'>
+							<CheckIcon className='h-5 w-5' />
+							<svg className='absolute bottom-0 left-0 h-[34px] w-[34px]'>
+								<rect className=' h-[34px] w-[34px] animate-timelapse fill-transparent stroke-emperor-100 stroke-[3px]' />
+							</svg>
 						</span>
 					)}
-					{buttonState === 'clicked' && <span>Click to confirm</span>}
 				</span>
 			</button>
 		</div>
